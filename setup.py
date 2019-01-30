@@ -2,14 +2,14 @@
 
 import sys
 
-import axolotl
+import libsignal
 from setuptools import find_packages, setup
 
-deps = ['cryptography', 'python-axolotl-curve25519', 'protobuf>=3.0.0.b2']
+deps = ['cryptography', 'python-curve25519', 'protobuf>=3.0.0.b2']
 
 setup(
-    name='python-axolotl',
-    version=axolotl.__version__ ,
+    name='python-libsignal',
+    version=libsignal.__version__ ,
     packages= find_packages(),
     install_requires = deps,
     license='GPLv3 License',

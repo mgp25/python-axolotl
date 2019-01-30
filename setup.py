@@ -5,7 +5,7 @@ import sys
 import libsignal
 from setuptools import find_packages, setup
 
-deps = ['cryptography', 'python-curve25519', 'protobuf>=3.0.0.b2']
+deps = ['cryptography', 'curve25519', 'protobuf>=3.0.0.b2']
 
 setup(
     name='python-libsignal',

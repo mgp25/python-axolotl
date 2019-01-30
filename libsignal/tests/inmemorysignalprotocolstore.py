@@ -1,13 +1,13 @@
 # -*- coding: utf8 -*-
 
-from ..state.axolotlstore import AxolotlStore
+from ..state.signalprotocolstore import SignalProtocolStore
 from .inmemoryidentitykeystore import InMemoryIdentityKeyStore
 from .inmemoryprekeystore import InMemoryPreKeyStore
 from .inmemorysessionstore import InMemorySessionStore
 from .inmemorysignedprekeystore import InMemorySignedPreKeyStore
 
 
-class InMemoryAxolotlStore(AxolotlStore):
+class InMemorySignalProtocolStore(SignalProtocolStore):
     def __init__(self):
         self.identityKeyStore = InMemoryIdentityKeyStore()
         self.preKeyStore = InMemoryPreKeyStore()

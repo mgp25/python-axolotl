@@ -8,5 +8,5 @@ from .sessionstore import SessionStore
 from .signedprekeystore import SignedPreKeyStore
 
 
-class AxolotlStore(IdentityKeyStore, PreKeyStore, SignedPreKeyStore, SessionStore):
+class SignalProtocolStore(IdentityKeyStore, PreKeyStore, SignedPreKeyStore, SessionStore):
     __metaclass__ = abc.ABCMeta

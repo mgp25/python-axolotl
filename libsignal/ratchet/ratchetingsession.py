@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from ..ecc.curve import Curve
-from .bobaxolotlparamaters import BobAxolotlParameters
-from .aliceaxolotlparameters import AliceAxolotlParameters
+from .bobsignalprotocolparamaters import BobSignalProtocolParameters
+from .alicesignalprotocolparameters import AliceSignalProtocolParameters
 from ..kdf.hkdf import HKDF
 from ..util.byteutil import ByteUtil
 from .rootkey import RootKey
@@ -15,10 +15,10 @@ class RatchetingSession:
         """
         :type sessionState: SessionState
         :type sessionVersion: int
-        :type parameters: SymmetricAxolotlParameters
+        :type parameters: SymmetricSignalProtocolParameters
         """
         if RatchetingSession.isAlice(parameters.getOurBaseKey().getPublicKey(), parameters.getTheirBaseKey()):
-            aliceParameters = AliceAxolotlParameters.newBuilder()
+            aliceParameters = AliceSignalProtocolParameters.newBuilder()
             aliceParameters.setOurBaseKey(parameters.getOurBaseKey()) \
                 .setOurIdentityKey(parameters.getOurIdentityKey()) \
                 .setTheirRatchetKey(parameters.getTheirRatchetKey()) \
@@ -27,7 +27,7 @@ class RatchetingSession:
                 .setTheirOneTimePreKey(None)
             RatchetingSession.initializeSessionAsAlice(sessionState, sessionVersion, aliceParameters.create())
         else:
-            bobParameters = BobAxolotlParameters.newBuilder()
+            bobParameters = BobSignalProtocolParameters.newBuilder()
             bobParameters.setOurIdentityKey(parameters.getOurIdentityKey()) \
                 .setOurRatchetKey(parameters.getOurRatchetKey()) \
                 .setOurSignedPreKey(parameters.getOurBaseKey()) \
@@ -41,7 +41,7 @@ class RatchetingSession:
         """
         :type sessionState: SessionState
         :type sessionVersion: int
-        :type parameters: AliceAxolotlParameters
+        :type parameters: AliceSignalProtocolParameters
         """
         sessionState.setSessionVersion(sessionVersion)
         sessionState.setRemoteIdentityKey(parameters.getTheirIdentityKey())
@@ -76,7 +76,7 @@ class RatchetingSession:
         """
         :type sessionState: SessionState
         :type sessionVersion: int
-        :type parameters: BobAxolotlParameters
+        :type parameters: BobSignalProtocolParameters
         """
         sessionState.setSessionVersion(sessionVersion)
         sessionState.setRemoteIdentityKey(parameters.getTheirIdentityKey())

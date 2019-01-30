@@ -6,7 +6,7 @@ from ...identitykey import IdentityKey
 from ...identitykeypair import IdentityKeyPair
 from ...ecc.curve import Curve
 from ...ecc.eckeypair import ECKeyPair
-from ...ratchet.bobaxolotlparamaters import BobAxolotlParameters
+from ...ratchet.bobsignalprotocolparamaters import BobSignalProtocolParameters
 from ...state.sessionstate import SessionState
 from ...ratchet.ratchetingsession import RatchetingSession
 
@@ -57,7 +57,7 @@ class RatchetingSessionTest(unittest.TestCase):
         # aliceEphemeralPublicKey = Curve.decodePoint(aliceEphemeralPublic, 0)
         aliceIdentityPublicKey = IdentityKey(aliceIdentityPublic, 0)
 
-        parameters = BobAxolotlParameters.newBuilder() \
+        parameters = BobSignalProtocolParameters.newBuilder() \
             .setOurIdentityKey(bobIdentityKey) \
             .setOurSignedPreKey(bobBaseKey) \
             .setOurRatchetKey(bobEphemeralKey) \

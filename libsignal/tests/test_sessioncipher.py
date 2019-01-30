@@ -6,10 +6,10 @@ import sys
 from ..state.sessionrecord import SessionRecord
 from ..ecc.curve import Curve
 from ..identitykeypair import IdentityKeyPair, IdentityKey
-from ..ratchet.aliceaxolotlparameters import AliceAxolotlParameters
-from ..ratchet.bobaxolotlparamaters import BobAxolotlParameters
+from ..ratchet.alicesignalprotocolparameters import AliceSignalProtocolParameters
+from ..ratchet.bobsignalprotocolparamaters import BobSignalProtocolParameters
 from ..ratchet.ratchetingsession import RatchetingSession
-from ..tests.inmemoryaxolotlstore import InMemoryAxolotlStore
+from ..tests.inmemorysignalprotocolstore import InMemorySignalProtocolStore
 from ..sessioncipher import SessionCipher
 from ..protocol.whispermessage import WhisperMessage
 
@@ -28,8 +28,8 @@ class SessionCipherTest(unittest.TestCase):
         self.runInteraction(aliceSessionRecord, bobSessionRecord)
 
     def runInteraction(self, aliceSessionRecord, bobSessionRecord):
-        aliceStore = InMemoryAxolotlStore()
-        bobStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
+        bobStore = InMemorySignalProtocolStore()
 
         aliceStore.storeSession(2, 1, aliceSessionRecord)
         bobStore.storeSession(3, 1, bobSessionRecord)
@@ -109,7 +109,7 @@ class SessionCipherTest(unittest.TestCase):
         bobBaseKey = Curve.generateKeyPair()
         bobEphemeralKey = bobBaseKey
 
-        aliceParameters = AliceAxolotlParameters.newBuilder()\
+        aliceParameters = AliceSignalProtocolParameters.newBuilder()\
             .setOurIdentityKey(aliceIdentityKey)\
             .setOurBaseKey(aliceBaseKey)\
             .setTheirIdentityKey(bobIdentityKey.getPublicKey())\
@@ -118,7 +118,7 @@ class SessionCipherTest(unittest.TestCase):
             .setTheirOneTimePreKey(None)\
             .create()
 
-        bobParameters = BobAxolotlParameters.newBuilder()\
+        bobParameters = BobSignalProtocolParameters.newBuilder()\
             .setOurIdentityKey(bobIdentityKey)\
             .setOurOneTimePreKey(None)\
             .setOurRatchetKey(bobEphemeralKey)\
@@ -147,7 +147,7 @@ class SessionCipherTest(unittest.TestCase):
 
         # bobPreKey = Curve.generateKeyPair()
 
-        aliceParameters = AliceAxolotlParameters.newBuilder()\
+        aliceParameters = AliceSignalProtocolParameters.newBuilder()\
             .setOurBaseKey(aliceBaseKey)\
             .setOurIdentityKey(aliceIdentityKey)\
             .setTheirOneTimePreKey(None)\
@@ -156,7 +156,7 @@ class SessionCipherTest(unittest.TestCase):
             .setTheirIdentityKey(bobIdentityKey.getPublicKey())\
             .create()
 
-        bobParameters = BobAxolotlParameters.newBuilder()\
+        bobParameters = BobSignalProtocolParameters.newBuilder()\
             .setOurRatchetKey(bobEphemeralKey)\
             .setOurSignedPreKey(bobBaseKey)\
             .setOurOneTimePreKey(None)\

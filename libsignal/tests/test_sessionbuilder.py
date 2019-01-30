@@ -11,7 +11,7 @@ from ..protocol.ciphertextmessage import CiphertextMessage
 from ..protocol.whispermessage import WhisperMessage
 from ..protocol.prekeywhispermessage import PreKeyWhisperMessage
 from ..state.prekeybundle import PreKeyBundle
-from ..tests.inmemoryaxolotlstore import InMemoryAxolotlStore
+from ..tests.inmemorysignalprotocolstore import InMemorySignalProtocolStore
 from ..state.prekeyrecord import PreKeyRecord
 from ..state.signedprekeyrecord import SignedPreKeyRecord
 from ..tests.inmemoryidentitykeystore import InMemoryIdentityKeyStore
@@ -24,7 +24,7 @@ class SessionBuilderTest(unittest.TestCase):
     BOB_RECIPIENT_ID = 2
 
     def test_basicPreKeyV2(self):
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -32,7 +32,7 @@ class SessionBuilderTest(unittest.TestCase):
                                              self.__class__.BOB_RECIPIENT_ID,
                                              1)
 
-        bobStore = InMemoryAxolotlStore()
+        bobStore = InMemorySignalProtocolStore()
         bobPreKeyPair = Curve.generateKeyPair()
         bobPreKey = PreKeyBundle(bobStore.getLocalRegistrationId(), 1, 31337, bobPreKeyPair.getPublicKey(),
                                  0, None, None, bobStore.getIdentityKeyPair().getPublicKey())
@@ -75,7 +75,7 @@ class SessionBuilderTest(unittest.TestCase):
 
         self.runInteraction(aliceStore, bobStore)
 
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -123,7 +123,7 @@ class SessionBuilderTest(unittest.TestCase):
         return
 
     def test_basicPreKeyV3(self):
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -131,7 +131,7 @@ class SessionBuilderTest(unittest.TestCase):
                                              self.__class__.BOB_RECIPIENT_ID,
                                              1)
 
-        bobStore = InMemoryAxolotlStore()
+        bobStore = InMemorySignalProtocolStore()
         bobPreKeyPair = Curve.generateKeyPair()
         bobSignedPreKeyPair = Curve.generateKeyPair()
         bobSignedPreKeySignature = Curve.calculateSignature(bobStore.getIdentityKeyPair().getPrivateKey(),
@@ -189,7 +189,7 @@ class SessionBuilderTest(unittest.TestCase):
 
         self.runInteraction(aliceStore, bobStore)
 
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -242,7 +242,7 @@ class SessionBuilderTest(unittest.TestCase):
             pass
 
     def test_badSignedPreKeySignature(self):
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore, aliceStore, aliceStore, aliceStore,
                                              self.__class__.BOB_RECIPIENT_ID, 1)
 
@@ -273,7 +273,7 @@ class SessionBuilderTest(unittest.TestCase):
         aliceSessionBuilder.processPreKeyBundle(bobPreKey)
 
     def test_basicKeyExchange(self):
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -281,7 +281,7 @@ class SessionBuilderTest(unittest.TestCase):
                                              self.__class__.BOB_RECIPIENT_ID,
                                              1)
 
-        bobStore = InMemoryAxolotlStore()
+        bobStore = InMemorySignalProtocolStore()
         bobSessionBuilder = SessionBuilder(bobStore,
                                            bobStore,
                                            bobStore,
@@ -308,7 +308,7 @@ class SessionBuilderTest(unittest.TestCase):
 
         self.runInteraction(aliceStore, bobStore)
 
-        aliceStore = InMemoryAxolotlStore()
+        aliceStore = InMemorySignalProtocolStore()
         aliceSessionBuilder = SessionBuilder(aliceStore,
                                              aliceStore,
                                              aliceStore,
@@ -330,8 +330,8 @@ class SessionBuilderTest(unittest.TestCase):
 
     def runInteraction(self, aliceStore, bobStore):
         """
-        :type aliceStore: AxolotlStore
-        :type  bobStore: AxolotlStore
+        :type aliceStore: SignalProtocolStore
+        :type  bobStore: SignalProtocolStore
         """
         aliceSessionCipher = SessionCipher(aliceStore,
                                            aliceStore,

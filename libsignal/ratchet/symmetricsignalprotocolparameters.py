@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class SymmetricAxolotlParameters:
+class SymmetricSignalProtocolParameters:
     def __init__(self, ourBaseKey, ourRatchetKey, ourIdentityKey, theirBaseKey,
                  theirRatchetKey, theirIdentityKey):
         """
@@ -43,7 +43,7 @@ class SymmetricAxolotlParameters:
 
     @staticmethod
     def newBuilder():
-        return SymmetricAxolotlParameters.Builder()
+        return SymmetricSignalProtocolParameters.Builder()
 
     class Builder:
         def __init__(self):
@@ -79,5 +79,5 @@ class SymmetricAxolotlParameters:
             return self
 
         def create(self):
-            return SymmetricAxolotlParameters(self.ourBaseKey, self.ourRatchetKey, self.ourIdentityKey,
+            return SymmetricSignalProtocolParameters(self.ourBaseKey, self.ourRatchetKey, self.ourIdentityKey,
                                               self.theirBaseKey, self.theirRatchetKey, self.theirIdentityKey)

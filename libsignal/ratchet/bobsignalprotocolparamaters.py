@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class BobAxolotlParameters:
+class BobSignalProtocolParameters:
     def __init__(self, ourIdentityKey, ourSignedPreKey, ourRatchetKey, ourOneTimePreKey,
                  theirIdentityKey, theirBaseKey):
         """
@@ -43,7 +43,7 @@ class BobAxolotlParameters:
 
     @staticmethod
     def newBuilder():
-        return BobAxolotlParameters.Builder()
+        return BobSignalProtocolParameters.Builder()
 
     class Builder:
         def __init__(self):
@@ -79,5 +79,5 @@ class BobAxolotlParameters:
             return self
 
         def create(self):
-            return BobAxolotlParameters(self.ourIdentityKey, self.ourSignedPreKey, self.ourRatchetKey,
+            return BobSignalProtocolParameters(self.ourIdentityKey, self.ourSignedPreKey, self.ourRatchetKey,
                                         self.ourOneTimePreKey, self.theirIdentityKey, self.theirBaseKey)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class AliceAxolotlParameters:
+class AliceSignalProtocolParameters:
     def __init__(self, ourIdentityKey, ourBaseKey, theirIdentityKey, theirSignedPreKey,
                  theirRatchetKey, theirOneTimePreKey):
         """
@@ -43,7 +43,7 @@ class AliceAxolotlParameters:
 
     @staticmethod
     def newBuilder():
-        return AliceAxolotlParameters.Builder()
+        return AliceSignalProtocolParameters.Builder()
 
     class Builder:
         def __init__(self):
@@ -79,5 +79,5 @@ class AliceAxolotlParameters:
             return self
 
         def create(self):
-            return AliceAxolotlParameters(self.ourIdentityKey, self.ourBaseKey, self.theirIdentityKey,
+            return AliceSignalProtocolParameters(self.ourIdentityKey, self.ourBaseKey, self.theirIdentityKey,
                                           self.theirSignedPreKey, self.theirRatchetKey, self.theirOneTimePreKey)

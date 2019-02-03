@@ -1,7 +1,7 @@
 class SenderKeyName(object):
-    def __init__(self, groupId, senderSignalProtocolAddress):
+    def __init__(self, groupId, senderSignalAddress):
         self.groupId = groupId
-        self.sender = senderSignalProtocolAddress
+        self.sender = senderSignalAddress
 
     def getGroupId(self):
         return self.groupId

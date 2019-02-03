@@ -9,10 +9,10 @@ from ...groups.groupcipher import GroupCipher
 from ...duplicatemessagexception import DuplicateMessageException
 from ...nosessionexception import NoSessionException
 from ...groups.senderkeyname import SenderKeyName
-from ...signaladdress import SignalAddress
+from ...signalprotocoladdress import SignalProtocolAddress
 from ...protocol.senderkeydistributionmessage import SenderKeyDistributionMessage
 
-SENDER_ADDRESS = SignalAddress("+14150001111", 1)
+SENDER_ADDRESS = SignalProtocolAddress("+14150001111", 1)
 GROUP_SENDER   = SenderKeyName("nihilist history reading group", SENDER_ADDRESS);
 
 
